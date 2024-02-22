@@ -1,3 +1,5 @@
+import Views.LoginView
+
 fun main() {
-    println("Hello World!")
+    LoginView().AttemptLoginView()
 }
