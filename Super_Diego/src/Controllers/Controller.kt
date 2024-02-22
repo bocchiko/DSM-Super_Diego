@@ -1,6 +1,9 @@
 package Controllers
 import Models.User
+import Models.Product
 import java.io.File
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 open class Controller {
 
@@ -14,5 +17,19 @@ open class Controller {
         }
         return users
     }
+    fun getAllProducts(): List<Product>{
+        val products = mutableListOf<Product>()
+        val productsTxt = File("src/utils/products.txt")
+        productsTxt.forEachLine { line ->
+            val (id, name, quantity, unitPrice) = line.split(",")
+            val product = Product(id.toInt(), name, quantity.toInt(), unitPrice.toDouble())
+            products.add(product)
+        }
+        return products
+    }
 
+    fun getCurrentDateTimeAsString(): String {
+        val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
+        return LocalDateTime.now().format(formatter)
+    }
 }

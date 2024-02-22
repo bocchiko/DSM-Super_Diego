@@ -46,7 +46,7 @@ class LoginView {
             val opcion = readLine()?.toIntOrNull()
 
             when (opcion) {
-                1 -> println("Aqui ira llamada a vista para realizar una venta")
+                1 -> PurchaseView().purchaseIndex()
                 2 -> println("Aqui ira llamada a vista para consultar inventario")
                 3 -> logOut()
                 else -> println("Opción no válida. Inténtelo nuevamente.")
@@ -65,7 +65,7 @@ class LoginView {
             val opcion = readLine()?.toIntOrNull()
 
             when (opcion) {
-                1 -> println("Aqui ira llamada a vista para realizar una venta")
+                1 -> PurchaseView().purchaseIndex()
                 2 -> println("Aqui ira llamada a vista para consultar inventario")
                 3 -> logOut()
                 else -> println("Opción no válida. Inténtelo nuevamente.")

@@ -1,0 +1,10 @@
+1,producto1,30,0.1
+2,producto2,5,5.0
+3,producto3,60,3.0
+4,producto4,100,0.5
+5,producto5,500,0.8
+6,producto6,20,0.3
+7,producto7,25,2.25
+8,producto8,30,2.75
+9,producto9,180,1.8
+10,producto10,50,3.25
