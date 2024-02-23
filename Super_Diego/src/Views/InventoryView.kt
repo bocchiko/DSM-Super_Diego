@@ -1,7 +1,7 @@
 package Views
 
 import Controllers.InventoryController
-
+import Controllers.PurchaseController
 import java.util.*
 
 class InventoryView {
