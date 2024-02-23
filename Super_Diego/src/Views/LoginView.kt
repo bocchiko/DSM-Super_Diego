@@ -47,7 +47,7 @@ class LoginView {
 
             when (opcion) {
                 1 -> PurchaseView().purchaseIndex()
-                2 -> println("Aqui ira llamada a vista para consultar inventario")
+                2 -> InventoryView().inventoryIndex()
                 3 -> logOut()
                 else -> println("Opción no válida. Inténtelo nuevamente.")
             }
@@ -66,7 +66,7 @@ class LoginView {
 
             when (opcion) {
                 1 -> PurchaseView().purchaseIndex()
-                2 -> println("Aqui ira llamada a vista para consultar inventario")
+                2 -> InventoryView().inventoryIndex()
                 3 -> logOut()
                 else -> println("Opción no válida. Inténtelo nuevamente.")
             }
@@ -83,7 +83,7 @@ class LoginView {
             val opcion = readLine()?.toIntOrNull()
 
             when (opcion) {
-                1 -> println("Aqui ira llamada a vista para consultar inventario")
+                1 -> InventoryView().inventoryIndex()
                 2 -> logOut()
                 else -> println("Opción no válida. Inténtelo nuevamente.")
             }
