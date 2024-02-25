@@ -35,7 +35,7 @@ class LoginView {
         }
     }
 
-    fun AdminMenu(){
+    private fun AdminMenu(){
         println("BIENVENIDO , ${AuthenticationController.currentUser?.username}!")
         println(" ¿Que Desea Hacer ?")
         do{
@@ -54,7 +54,7 @@ class LoginView {
         }while (opcion != 3)
     }
 
-    fun VendedorMenu(){
+    private fun VendedorMenu(){
         println("BIENVENIDO , ${AuthenticationController.currentUser?.username}!")
         println(" ¿Que Desea Hacer ?")
         do{
@@ -73,7 +73,7 @@ class LoginView {
         }while (opcion != 3)
     }
 
-    fun InvitadoMenu(){
+    private fun InvitadoMenu(){
         println("BIENVENIDO , ${AuthenticationController.currentUser?.username}!")
         println(" ¿Que Desea Hacer ?")
         do{
@@ -90,7 +90,7 @@ class LoginView {
         }while (opcion != 2)
     }
 
-    fun logOut(){
+    private fun logOut(){
         println("Hasta Luego !!!")
     }
 
