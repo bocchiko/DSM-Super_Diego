@@ -4,6 +4,9 @@ import Models.Product
 import java.io.File
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.io.FileWriter
+import java.io.StringWriter
+import java.io.PrintWriter
 
 open class Controller {
 
@@ -31,5 +34,18 @@ open class Controller {
     fun getCurrentDateTimeAsString(): String {
         val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
         return LocalDateTime.now().format(formatter)
+    }
+
+    fun logError(errorMessage: String, exception: Exception) {
+        exception.printStackTrace()
+
+        val logMessage = "[${getCurrentDateTimeAsString()}] Error: $errorMessage - ${exception.javaClass.name}: ${exception.message}\n"
+        val logFile = File("src/utils/logs/log.txt")
+        logFile.appendText(logMessage)
+
+        val sw = StringWriter()
+        val pw = PrintWriter(sw)
+        exception.printStackTrace(pw)
+        logFile.appendText("StackTrace:\n$sw\n")
     }
 }

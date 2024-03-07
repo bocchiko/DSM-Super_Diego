@@ -17,25 +17,31 @@ class PurchaseController : Controller() {
     }
 
     fun createPurchase(operation: String): Boolean{
-        val operations = operation.split(",").chunked(2) { (productId, quantity) ->
-            Pair(productId.toInt(), quantity.toInt())
-        }
-        for ((productId, quantity) in operations) {
-            val product = products.find { it.id == productId } ?: return false
-            if (product.quantity < quantity) {
-                // Not enough quantity available
-                return false
+        try {
+            val operations = operation.split(",").chunked(2) { (productId, quantity) ->
+                Pair(productId.toInt(), quantity.toInt())
             }
+            for ((productId, quantity) in operations) {
+                val product = products.find { it.id == productId } ?: return false
+                if (product.quantity < quantity) {
+                    // Not enough quantity available
+                    return false
+                }
+            }
+            for ((productId, quantity) in operations) {
+                val product = products.find { it.id == productId } ?: return false
+                product.quantity -= quantity
+            }
+            saveInFile(products)
+            createTicket(operations)
+            // Purchase successful
+            return true
+        } catch (e: Exception) {
+            logError("Error al intentar crear una compra: ", e)
+            return false
         }
-        for ((productId, quantity) in operations) {
-            val product = products.find { it.id == productId } ?: return false
-            product.quantity -= quantity
-        }
-        saveInFile(products) //funciona
-        createTicket(operations)
-        // Purchase successful
-        return true
     }
+
     //methods to execute
     private fun createTicket(operations: List<Pair<Int,Int>>){
         println("  ~~~ FACTURA DE COMPRA ~~~ ")
@@ -60,6 +66,7 @@ class PurchaseController : Controller() {
         println("Total de factura: $%.2f".format(total))
         saveTicketToFile(operations,"src/utils/tickets/Ticket_"+getCurrentDateTimeAsString()+".txt")
     }
+
     private fun saveInFile(products: List<Product>) {
         val file = File("src/utils/products.txt")
         file.bufferedWriter().use { writer ->
@@ -68,6 +75,7 @@ class PurchaseController : Controller() {
             }
         }
     }
+
     private fun saveTicketToFile(operation: List<Pair<Int, Int>>, filename: String) {
         val file = File(filename)
         file.bufferedWriter().use { writer ->

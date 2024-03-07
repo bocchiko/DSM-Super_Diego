@@ -11,20 +11,30 @@ class InventoryController : Controller() {
     }
 
     fun getProducts(): List<Product> {
-        products = super.getAllProducts().toMutableList()
-        return products
+        try {
+            products = super.getAllProducts().toMutableList()
+            return products
+        } catch (e: Exception) {
+            logError("Error al intentar obtener productos: ", e)
+            return emptyList()
+        }
     }
 
     fun getInventory(command: String): List<Product> {
-        if(command == "TODOS"){
-            return products
-        }else {
-            val product = products.find { it.id.toString() == command || it.name == command }
-            return if (product != null) {
-                listOf(product)
-            } else {
-                emptyList() // Return an empty list if product not found
+        try {
+            if(command == "TODOS"){
+                return products
+            }else {
+                val product = products.find { it.id.toString() == command || it.name == command }
+                return if (product != null) {
+                    listOf(product)
+                } else {
+                    emptyList() // Return an empty list if product not found
+                }
             }
+        } catch (e: Exception) {
+            logError("Error al intentar obtener inventario: ", e)
+            return emptyList()
         }
     }
 }
