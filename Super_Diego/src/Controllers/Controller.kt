@@ -37,7 +37,7 @@ open class Controller {
     }
 
     fun logError(errorMessage: String, exception: Exception) {
-        exception.printStackTrace()
+        //exception.printStackTrace()
 
         val logMessage = "[${getCurrentDateTimeAsString()}] Error: $errorMessage - ${exception.javaClass.name}: ${exception.message}\n"
         val logFile = File("src/utils/logs/log.txt")
